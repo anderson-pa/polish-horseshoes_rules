@@ -1,0 +1,60 @@
+%\usetikzlibrary{arrows,patterns}
+\begin{tikzpicture}[line cap=round,line join=round,>=stealth,x=1.cm,y=1.cm]
+
+\def\pp{10} %pole to pole distance
+\def\d{2} %depth of player area
+\def\w{3} %width of court
+\def\extra{0.3} %how much to extend guide lines
+\def\mw{1} %width of pole zone
+\def\md{.5} %depth of pole zone
+
+\draw[fill=green!25] (-\pp/2-\d,-\w/2) rectangle (\pp/2+\d,\w/2);
+\draw[fill=green!25,color=green!25, pattern=crosshatch dots] (-\pp/2,-\w/2) rectangle (\pp/2,\w/2);
+\draw (-\pp/2-\d,-\w/2) rectangle (\pp/2+\d,\w/2);
+\draw[dashed] (0,-\w/2-\extra) -- (0,\w/2+\extra) node[above] {half court};
+
+\draw (\pp/2,0) coordinate(A);
+
+\foreach \i in {-1,1}
+  {
+  \draw[rounded corners=5*\md, fill=yellow!30] (\i*\pp/2,0) ++(-\md/2,-\mw/2) rectangle ++(\md,\mw);
+  \draw[dashed] (\i*\pp/2,0) +(0,-\w/2-\extra) -- +(0,\w/2+\extra) node[above] {$bp$};
+  \draw[color=black,fill=brown] (\i*\pp/2 +\i*0.08,rand/3) circle (.1);
+  }
+\draw[thick,|<->|] (-\pp/2,-\w/2-2*\extra) -- node[fill=white] {\pp\ m} +(\pp,0);
+\draw[thick,|<->|] (\pp/2,-\w/2-2*\extra) -- node[fill=white] {\d\ m} +(\d,0);
+\draw[thick,|<->|] (\pp/2+\d+2*\extra,-\w/2) -- node[fill=white] {\w\ m} +(0,\w);
+%\draw (0,0) circle(1);
+
+%players
+\begin{scope}[red, very thick, x=1.4mm, y=1.4mm, xshift=-5.8cm, xscale=1]
+\draw (0.2,7.5) ellipse(0.5 and 0.5) ++(-110:.5) -- ++(0,-2.75);
+\draw (0.,4.25) -- ++(-10:0.5) -- ++(-50:1.6) -- ++(-80:2) -- ++(-5:0.6);
+\draw (0.,4.25) -- ++(-170:0.5) -- ++(-130:1.6) -- ++(-100:2) -- ++(-175:0.6);
+\draw (0, 6.5) -- ++(-10:0.5) -- ++(-45:1.5) -- ++(20:1.5) -- +(70:0.65) +(0,0) -- ++(-20:.3);
+\draw (0, 6.5) -- ++(-170:0.5) -- ++(-115:1.5) -- ++(0:1.5) -- +(-25:0.65) +(0,0) -- ++(30:.3);
+\end{scope}
+\begin{scope}[red, very thick, x=1.4mm, y=1.4mm, xshift=-6.3cm, yshift=-1.2cm, xscale=1]
+\draw (0.2,7.5) ellipse(0.5 and 0.5) ++(-114:.5) -- ++(0,-2.8);
+\draw (0.,4.25) -- ++(-10:0.5) -- ++(-50:1.6) -- ++(-80:2) -- ++(-5:0.6);
+\draw (0.,4.25) -- ++(-170:0.5) -- ++(-130:1.6) -- ++(-100:2) -- ++(-175:0.6);
+\draw (0, 6.5) -- ++(-10:0.5) -- ++(-45:1.5) -- ++(20:1.5) -- +(70:0.65) +(0,0) -- ++(-20:.3);
+\draw (0, 6.5) -- ++(-170:0.5) -- ++(-135:1.5) -- ++(90:1.5) -- +(65:0.65) +(0,0) -- ++(0:.3);
+\end{scope}
+\begin{scope}[blue, very thick, x=1.4mm, y=1.4mm, xshift=6.5cm, xscale=-1]
+\draw (0.2,7.5) ellipse(0.5 and 0.5) ++(-110:.5) -- ++(0,-2.75);
+\draw (0.,4.25) -- ++(-10:0.5) -- ++(-50:1.6) -- ++(-80:2) -- ++(-5:0.6);
+\draw (0.,4.25) -- ++(-170:0.5) -- ++(-130:1.6) -- ++(-100:2) -- ++(-175:0.6);
+\draw (0, 6.5) -- ++(-10:0.5) -- ++(-45:1.5) -- ++(20:1.5) -- +(70:0.65) +(0,0) -- ++(-20:.3);
+\draw (0, 6.5) -- ++(-170:0.5) -- ++(-115:1.5) -- ++(-10:1.5) -- +(-45:0.65) +(0,0) -- ++(20:.3);
+\end{scope}
+\begin{scope}[blue, very thick, x=1.4mm, y=1.4mm, xshift=5.8cm, yshift=-1.2cm, xscale=-1]
+\draw (0.2,7.5) ellipse(0.5 and 0.5) ++(-114:.5) -- ++(0,-2.8);
+\draw (0.,4.25) -- ++(-10:0.5) -- ++(-50:1.6) -- ++(-80:2) -- ++(-5:0.6);
+\draw (0.,4.25) -- ++(-170:0.5) -- ++(-130:1.6) -- ++(-100:2) -- ++(-175:0.6);
+\draw (0, 6.5) -- ++(-10:0.5) -- ++(-45:1.5) -- ++(20:1.5) -- +(70:0.65) +(0,0) -- ++(-20:.3);
+\draw (0, 6.5) -- ++(-170:0.5) -- ++(115:1.5) -- ++(40:1.5) -- +(65:0.65) +(0,0) -- ++(-20:.3);
+\end{scope}
+
+\end{tikzpicture}
+
