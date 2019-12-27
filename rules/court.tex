@@ -1,60 +1,79 @@
 %\usetikzlibrary{arrows,patterns}
-\begin{tikzpicture}[line cap=round,line join=round,>=stealth,x=1.cm,y=1.cm]
+\begin{tikzpicture}[line cap=round,line join=round,>=stealth,x=1.1cm,y=1.1cm]
 
-\def\pp{10} %pole to pole distance
-\def\d{2} %depth of player area
-\def\w{3} %width of court
-\def\extra{0.3} %how much to extend guide lines
-\def\mw{1} %width of pole zone
-\def\md{.5} %depth of pole zone
+% court specifications
+\def\w{2.5} % width of court
+\def\pp{10} % minimum pole to pole distance
+\def\d{2.5} % depth of player area
+\def\pzi{0.4} % depth that pole zone is inset into player area
+\def\pzw{1.6} % width of pole zone
+\def\pzd{0.5} % depth of pole zone
+\def\extra{0.5} % how much to extend guide lines
+\def\bt{0.1} % border thickness for player area
 
-\draw[fill=green!25] (-\pp/2-\d,-\w/2) rectangle (\pp/2+\d,\w/2);
-\draw[fill=green!25,color=green!25, pattern=crosshatch dots] (-\pp/2,-\w/2) rectangle (\pp/2,\w/2);
-\draw (-\pp/2-\d,-\w/2) rectangle (\pp/2+\d,\w/2);
-\draw[dashed] (0,-\w/2-\extra) -- (0,\w/2+\extra) node[above] {half court};
+% convenience definitions
+\def\hw{\w/2} % half the width of the court
+\def\hpp{\pp/2} % half the minimum pole to pole distance
 
-\draw (\pp/2,0) coordinate(A);
+% entire court area
+\draw[fill=green!25] (-\hpp+\pzi-\d,-\hw) rectangle (\hpp-\pzi+\d,\hw);
 
-\foreach \i in {-1,1}
-  {
-  \draw[rounded corners=5*\md, fill=yellow!30] (\i*\pp/2,0) ++(-\md/2,-\mw/2) rectangle ++(\md,\mw);
-  \draw[dashed] (\i*\pp/2,0) +(0,-\w/2-\extra) -- +(0,\w/2+\extra) node[above] {$bp$};
-  \draw[color=black,fill=brown] (\i*\pp/2 +\i*0.08,rand/3) circle (.1);
-  }
-\draw[thick,|<->|] (-\pp/2,-\w/2-2*\extra) -- node[fill=white] {\pp\ m} +(\pp,0);
-\draw[thick,|<->|] (\pp/2,-\w/2-2*\extra) -- node[fill=white] {\d\ m} +(\d,0);
-\draw[thick,|<->|] (\pp/2+\d+2*\extra,-\w/2) -- node[fill=white] {\w\ m} +(0,\w);
-%\draw (0,0) circle(1);
+\foreach \i in {-1,1}{
+  % player zones
+  \draw[fill=brown] ({\i*(\hpp-\pzi)}, -\hw) rectangle ++(\i*\d, \w);
+  \draw[fill=brown!20] ({\i*(\hpp-\pzi+\bt)}, -\hw+\bt) rectangle ++({\i*(\d-2*\bt)}, \w-2*\bt);
+}
 
-%players
-\begin{scope}[red, very thick, x=1.4mm, y=1.4mm, xshift=-5.8cm, xscale=1]
-\draw (0.2,7.5) ellipse(0.5 and 0.5) ++(-110:.5) -- ++(0,-2.75);
-\draw (0.,4.25) -- ++(-10:0.5) -- ++(-50:1.6) -- ++(-80:2) -- ++(-5:0.6);
-\draw (0.,4.25) -- ++(-170:0.5) -- ++(-130:1.6) -- ++(-100:2) -- ++(-175:0.6);
-\draw (0, 6.5) -- ++(-10:0.5) -- ++(-45:1.5) -- ++(20:1.5) -- +(70:0.65) +(0,0) -- ++(-20:.3);
-\draw (0, 6.5) -- ++(-170:0.5) -- ++(-115:1.5) -- ++(0:1.5) -- +(-25:0.65) +(0,0) -- ++(30:.3);
+% pattern for middle zone
+\fill[pattern=crosshatch dots, pattern color=black!40] 
+	(-\hpp-\pzd/2,-\hw) rectangle (\hpp+\pzd/2,\hw);
+
+% half court line and label
+\draw[dashed] (0,-\hw) -- (0,\hw+\extra/2) node[above] {half court};
+
+\foreach \i in {-1,1}{
+  % pole zones
+  \draw[rounded corners=5*\pzd, fill=yellow!30] (\i*\pp/2,-\pzw/2) rectangle ++(\i*\pzd,\pzw);
+    
+  % bottles
+  \draw[color=red, fill=red] ({\i*(\hpp+\pzd/2) +\i*0.08}, rand/3) circle(.1) coordinate(cup);
+  \draw[thin, color=black,fill=brown] (cup) circle (0.08) circle(0.03);
+
+  % bottle plane lines and labels
+  \draw[dashed] ({\i*(\hpp+\pzd/2)},0) +(0,-\hw) -- +(0,\hw+\extra/2) node[above] {$bp$};
+  \draw[dashed] (\i*\hpp, -\hw-\extra/2) -- ++(0, \hw);
+}
+\draw[dashed] (\hpp+\pzd, -\hw-\extra/2) -- ++(0, \hw);
+
+% distance callouts for middle zone, court width, pole zone depth, and player area depth, respectively
+\draw[thick,|<->|] (-\hpp, -\hw-\extra) -- node[fill=white] {\pp\ m} +(\pp,0);
+\draw[thick,|<->|] (\hpp-\pzi+\d+\extra,-\hw) -- node[fill=white, xshift=7] {\w\ m} +(0,\w);
+\draw[thick,|<-] (\hpp+\pzd,-\hw-\extra) -- node[fill=white, anchor=west, xshift=0] {\pzd\ m} +(\pzd,0);
+
+% \draw[thick,|<->|] (\pp/2,-\w/2-2*\extra) -- node[fill=white, anchor=north, yshift=-5] {\pzd\ m} +(\pzd,0);
+% \draw[thick,|<->|] (\pp/2+\pzd,-\w/2-\extra) -- node[fill=white] {\sim\d\ m} +(\d,0);
+% \draw (0,0) circle(1);
+
+%players left (top, bottom) and right (top, bottom)
+\begin{scope}[thick, x=2mm, y=2mm, xshift=-7cm, xscale=1, rotate=-20]
+	\draw[line width=1.8mm] (0, 1.65) -- ++(0.8, .4) -- ++(1.2, 0.1) coordinate(hand1);
+	\draw[color=black!20!red,line width=1.3mm] (0, 1.65) -- ++(0.8, .4) -- ++(1.2, 0.1);
+	\draw[line width=1.8mm] (0, -1.65) -- ++(.5, -.5) -- ++(.7, -.3) coordinate(beer1);
+	\draw[color=black!20!red, line width=1.3mm] (0, -1.65) -- ++(.5, -.5) -- ++(.7, -.3);
+	\draw[thin, fill=brown!60] (hand1) ellipse(0.5 and 0.4) (beer1) ellipse(0.6 and 0.4);
+	\draw[thin, fill=brown] (beer1) +(0,0.3) circle(0.45) circle(0.18);
+	\draw[fill=red] ellipse(.8 and 2);
+	\draw[fill=brown!50!black] (.1,0) circle(1);
 \end{scope}
-\begin{scope}[red, very thick, x=1.4mm, y=1.4mm, xshift=-6.3cm, yshift=-1.2cm, xscale=1]
-\draw (0.2,7.5) ellipse(0.5 and 0.5) ++(-114:.5) -- ++(0,-2.8);
-\draw (0.,4.25) -- ++(-10:0.5) -- ++(-50:1.6) -- ++(-80:2) -- ++(-5:0.6);
-\draw (0.,4.25) -- ++(-170:0.5) -- ++(-130:1.6) -- ++(-100:2) -- ++(-175:0.6);
-\draw (0, 6.5) -- ++(-10:0.5) -- ++(-45:1.5) -- ++(20:1.5) -- +(70:0.65) +(0,0) -- ++(-20:.3);
-\draw (0, 6.5) -- ++(-170:0.5) -- ++(-135:1.5) -- ++(90:1.5) -- +(65:0.65) +(0,0) -- ++(0:.3);
-\end{scope}
-\begin{scope}[blue, very thick, x=1.4mm, y=1.4mm, xshift=6.5cm, xscale=-1]
-\draw (0.2,7.5) ellipse(0.5 and 0.5) ++(-110:.5) -- ++(0,-2.75);
-\draw (0.,4.25) -- ++(-10:0.5) -- ++(-50:1.6) -- ++(-80:2) -- ++(-5:0.6);
-\draw (0.,4.25) -- ++(-170:0.5) -- ++(-130:1.6) -- ++(-100:2) -- ++(-175:0.6);
-\draw (0, 6.5) -- ++(-10:0.5) -- ++(-45:1.5) -- ++(20:1.5) -- +(70:0.65) +(0,0) -- ++(-20:.3);
-\draw (0, 6.5) -- ++(-170:0.5) -- ++(-115:1.5) -- ++(-10:1.5) -- +(-45:0.65) +(0,0) -- ++(20:.3);
-\end{scope}
-\begin{scope}[blue, very thick, x=1.4mm, y=1.4mm, xshift=5.8cm, yshift=-1.2cm, xscale=-1]
-\draw (0.2,7.5) ellipse(0.5 and 0.5) ++(-114:.5) -- ++(0,-2.8);
-\draw (0.,4.25) -- ++(-10:0.5) -- ++(-50:1.6) -- ++(-80:2) -- ++(-5:0.6);
-\draw (0.,4.25) -- ++(-170:0.5) -- ++(-130:1.6) -- ++(-100:2) -- ++(-175:0.6);
-\draw (0, 6.5) -- ++(-10:0.5) -- ++(-45:1.5) -- ++(20:1.5) -- +(70:0.65) +(0,0) -- ++(-20:.3);
-\draw (0, 6.5) -- ++(-170:0.5) -- ++(115:1.5) -- ++(40:1.5) -- +(65:0.65) +(0,0) -- ++(-20:.3);
+\begin{scope}[thick, x=2mm, y=2mm, xshift=7cm, xscale=-1, rotate=-20]
+	\draw[line width=1.8mm] (0, 1.65) -- ++(0.8, .4) -- ++(1.2, 0.1) coordinate(hand1);
+	\draw[color=blue!60,line width=1.3mm] (0, 1.65) -- ++(0.8, .4) -- ++(1.2, 0.1);
+	\draw[line width=1.8mm] (0, -1.65) -- ++(.5, -.5) -- ++(.7, -.3) coordinate(beer1);
+	\draw[color=blue!60, line width=1.3mm] (0, -1.65) -- ++(.5, -.5) -- ++(.7, -.3);
+	\draw[thin, fill=brown!60] (hand1) ellipse(0.5 and 0.4) (beer1) ellipse(0.6 and 0.4);
+	\draw[thin, fill=brown] (beer1) +(0,0.3) circle(0.45) circle(0.18);
+	\draw[fill=blue!70] ellipse(.8 and 2);
+	\draw[fill=brown!50!black] (.1,0) circle(1);
 \end{scope}
 
 \end{tikzpicture}
-
