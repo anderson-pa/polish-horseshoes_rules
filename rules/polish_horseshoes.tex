@@ -1,26 +1,4 @@
 \documentclass[11pt,letterpaper,twocolumn,english,DIV=calc]{scrartcl}
-\usepackage{fontspec}
-\usepackage[footsepline]{scrlayer-scrpage}
-\setmainfont[Ligatures=TeX]{TeX Gyre Heros}
-\setsansfont[Ligatures=TeX]{Linux Biolinum O}
-\setcounter{secnumdepth}{2}
-\setcounter{tocdepth}{2}
-\usepackage{color}
-\usepackage{array}
-\usepackage{float}
-\usepackage{units}
-\usepackage{url}
-\usepackage{enumitem}
-\usepackage{graphicx}
-\usepackage{setspace}
-\usepackage[authoryear]{natbib}
-\usepackage[unicode=true, bookmarks=true, bookmarksnumbered=false,
-			bookmarksopen=false, breaklinks=false, pdfborder={0 0 0},pdfborderstyle={}, backref=false, colorlinks=true]{hyperref}
-\hypersetup{pdftitle={Polish Horseshoes, Brookline Rules},
-			pdfauthor={Phillip Anderson}, pdfsubject={polish horseshoes},
-			pdfkeywords={beer, frisbee, polish, horseshoes, brookline}}
-
-\makeatletter
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % This template is based on:
@@ -31,44 +9,74 @@
 % License: CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\newcommand{\rev}{Revision 6}
-\newcommand{\currentyear}{2019}
+\usepackage{fontspec}
+\setmainfont[Ligatures=TeX]{TeX Gyre Heros}
+\setsansfont[Ligatures=TeX]{Linux Biolinum O}
 
-\newcommand{\proposed}{{\color{DarkRed} \textsc{(Proposed) }}}
+\PassOptionsToPackage{svgnames}{xcolor}
+\usepackage[
+  % HomeHTMLFilename=index, % Filename of the homepage.
+  % HTMLFilename={node-}, % Filename prefix of other pages.
+  % IndexLanguage=english, % Language for xindy index, glossary.
+  % latexmk, % Use latexmk to compile.
+	% mathjax, % Use MathJax to display math.
+]{lwarp}
+% \boolfalse{FileSectionNames} % If false, numbers the files
+
+\makeatletter
+\newcommand{\rev}{Revision 6}
+\newcommand{\proposed}{{\color{DarkRed}\textsc{(Proposed)} }}
+\newcommand{\HorRule}{\color{Black} \rule{\linewidth}{1pt}} % Horizontal rule around the title
+
 \usepackage{draftwatermark}
 
-%\usepackage[protrusion=true,expansion=true]{microtype} % Better typography
-\usepackage[svgnames]{xcolor}
-\usepackage[format=plain, labelfont=bf,up, textfont=up]{caption} % Custom captions under/above floats in tables or figures
+\usepackage{array}
 \usepackage{booktabs} % Horizontal rules in tables
+\usepackage[format=plain, labelfont=bf,up, textfont=up]{caption}
+\usepackage{enumitem}
 \usepackage{fix-cm}	 % Custom font sizes - for the initial letter in the doc
-\usepackage{sectsty} % Enables custom section titles
-\usepackage{lastpage}
-\usepackage{fontspec}
+\usepackage{float}
 \usepackage{fontawesome}
+\usepackage{graphicx}
+\usepackage{lastpage}
+\usepackage{setspace}
+\usepackage{titling} % Allows custom title configuration
+\usepackage{units}
+\usepackage{url}
 
 \usepackage{lettrine} % Package to accentuate the first letter of the text
 \newcommand{\initial}[1]{ % Defines the command and style for the first letter
 	\lettrine[lines=2, lhang=0.35, nindent=0.1em, loversize=0.25]{
 		\color{DarkRed}{\textsf{#1}}}{}}
 
-\hypersetup{urlcolor=DarkRed, linkcolor=DarkRed}
-
 \usepackage{tikz}
 \usetikzlibrary{arrows,patterns}
-%\setlength{\intextsep}{0cm plus1cm minus1cm}
 
+\usepackage{polyglossia}
+\setdefaultlanguage[variant=american]{english}
+
+\usepackage[footsepline]{scrlayer-scrpage}
 \ifoot{\footnotesize\rev}
-\cfoot{\footnotesize\copyright\ 2012-\currentyear\ 
-	   by Phillip Anderson. CC BY-NC-ND}
-
+\cfoot{\footnotesize\copyright\ 2012 - \the\year\ by Phillip Anderson. CC BY-NC-ND}
 \ofoot{\footnotesize Page \thepage\ of \pageref{LastPage}} % "Page 1 of 2"
-
 \deffootnote[0.7em]{0pt}{1.6em}{\makebox[0.7em][l]{\textsuperscript\thefootnotemark}}
 
-\usepackage{titling} % Allows custom title configuration
+\usepackage[authoryear]{natbib}
+\usepackage[unicode=true, bookmarks=true, bookmarksnumbered=false,
+        		bookmarksopen=false, breaklinks=false, pdfborder={0 0 0}, 
+	        	pdfborderstyle={}, backref=false, colorlinks=true]{hyperref}
+\hypersetup{pdftitle={Polish Horseshoes, Boston Rules},
+        		pdfauthor={Phillip Anderson}, pdfsubject={polish horseshoes},
+		        pdfkeywords={beer, frisbee, polish, horseshoes, boston}}
+\hypersetup{urlcolor=DarkRed, linkcolor=DarkRed}
+\pdfstringdefDisableCommands{\def\proposed{\textsc{(Proposed)}}}
 
-\newcommand{\HorRule}{\color{Black} \rule{\linewidth}{1pt}} % Defines the gold horizontal rule around the title
+\setcounter{secnumdepth}{2}
+\setcounter{tocdepth}{2}
+\setlist[enumerate, 1]{label=\thesection.\arabic*, parsep=0pt}
+\setlist[enumerate, 2]{leftmargin=1.4em}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \pretitle{\vspace{-85pt} \begin{flushleft} \HorRule \fontsize{50}{50}  \color{DarkRed} \selectfont} % Horizontal rule before the title
 
@@ -76,28 +84,23 @@
 
 \posttitle{\par\end{flushleft}\vskip .0em} % Whitespace under the title
 
-\preauthor{\color{DarkRed} \huge\hspace{2pt}\textsf{Brookline Rules} %\begin{flushleft}\large \lineskip 0.5em \usefont{OT1}{phv}{b}{sl} \color{DarkRed}
-} % Author font configuration
+\preauthor{\color{DarkRed} \huge\hspace{2pt}\textsf{Boston Rules}} %
 
 \author{}
 
-\postauthor{\footnotesize \color{Black} % Configuration for the institution name
-%University of  % Your institution
+\postauthor{\footnotesize \color{Black}
 
-%\par\end{flushleft}
 \HorRule
 
 \hfill \color{Black}\large \rev: \today \vspace{-25pt}} % Horizontal rule after the title
 
 \setlength{\columnsep}{4ex}
-\date{} % Add a date here if you would like one to appear underneath the title block
-\setlist[enumerate, 1]{label=\thesection.\arabic*, parsep=0pt}
-\setlist[enumerate, 2]{leftmargin=1.4em}
+\date{}
 
 \makeatother
 
-\usepackage{polyglossia}
-\setdefaultlanguage[variant=american]{english}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \begin{document}
 \maketitle
 
@@ -178,8 +181,7 @@ The cup is considered to be part of the pole.
  
 Players position themselves behind their own \emph{bottle plane}, an imaginary plane perpendicular to the long axis of the court that extends vertically from the ground through the point of the bottle closest to half court.
 
-\newpage
-\begin{figure}[!h]
+\begin{figure}[!ht]
 	\begin{centering}
 		\include{pole_setup_combined}\vspace{-5mm}\par
 	\end{centering}
@@ -410,13 +412,13 @@ Nobody involved with writing or distributing this document is responsible for in
 
 \addsec{License}
 
-\copyright\ 2012-\currentyear\ by Phillip Anderson. 
+\copyright\ 2012 - \the\year\ by Phillip Anderson. 
 
 \noindent This work is licensed under the Creative Commons Attribution
 - NonCommercial - NoDerivatives 4.0 International License. 
 Visit \href{http://creativecommons.org/licenses/by-nc-nd/4.0/}{creativecommons.org} to view a copy of this license.
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
 	\includegraphics[width=\columnwidth]{images/by-nc-nd}
 \end{figure}
 
