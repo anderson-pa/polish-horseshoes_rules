@@ -1,0 +1,134 @@
+\documentclass[11pt,letterpaper,twocolumn,english,DIV=calc]{scrartcl}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% This template is based on:
+%
+% Large Colored Title Article LaTeX Template, Version 1.1 (25/11/12)
+% Downloaded from: http://www.LaTeXTemplates.com
+% Original author: Frits Wenneker (http://www.howtotex.com)
+% License: CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{fontspec}
+\setmainfont[Ligatures=TeX]{TeX Gyre Heros}
+\setsansfont[Ligatures=TeX]{Linux Biolinum O}
+
+\PassOptionsToPackage{svgnames}{xcolor}
+\usepackage[
+  % HomeHTMLFilename=index, % Filename of the homepage.
+  % HTMLFilename={node-}, % Filename prefix of other pages.
+  % IndexLanguage=english, % Language for xindy index, glossary.
+  % latexmk, % Use latexmk to compile.
+	% mathjax, % Use MathJax to display math.
+]{lwarp}
+% \boolfalse{FileSectionNames} % If false, numbers the files
+
+\makeatletter
+\newcommand{\rev}{Revision 1}
+\newcommand{\proposed}{{\color{CadetBlue}\textsc{(Proposed)} }}
+\newcommand{\HorRule}{\color{Black} \rule{\linewidth}{1pt}} % Horizontal rule around the title
+
+\usepackage{draftwatermark}
+
+\usepackage{array}
+\usepackage{booktabs} % Horizontal rules in tables
+\usepackage[format=plain, labelfont=bf,up, textfont=up]{caption}
+\usepackage{enumitem}
+\usepackage{fix-cm}	 % Custom font sizes - for the initial letter in the doc
+\usepackage{float}
+\usepackage{fontawesome}
+\usepackage{graphicx}
+\usepackage{setspace}
+\usepackage{titling} % Allows custom title configuration
+\usepackage{units}
+\usepackage{url}
+
+\usepackage{xr}
+\externaldocument{polish_horseshoes}
+\usepackage{lastpage}
+
+\usepackage{lettrine} % Package to accentuate the first letter of the text
+\newcommand{\initial}[1]{ % Defines the command and style for the first letter
+	\lettrine[lines=2, lhang=0.35, nindent=0.1em, loversize=0.25]{
+		\color{CadetBlue}{\textsf{#1}}}{}}
+
+\usepackage{tikz}
+\usetikzlibrary{arrows,patterns}
+
+\usepackage{polyglossia}
+\setdefaultlanguage[variant=american]{english}
+
+\usepackage[footsepline]{scrlayer-scrpage}
+\ifoot{\footnotesize\rev}
+\cfoot{\footnotesize\copyright\ 2012 - \the\year\ by Phillip Anderson. CC BY-NC-ND}
+\ofoot{\footnotesize Page \thepage\ of \pageref{LastPage}} % "Page 1 of 2"
+\deffootnote[0.7em]{0pt}{1.6em}{\makebox[0.7em][l]{\textsuperscript\thefootnotemark}}
+
+\usepackage[authoryear]{natbib}
+\usepackage[unicode=true, bookmarks=true, bookmarksnumbered=false,
+        		bookmarksopen=false, breaklinks=false, pdfborder={0 0 0}, 
+	        	pdfborderstyle={}, backref=false, colorlinks=true]{hyperref}
+\hypersetup{pdftitle={Polish Horseshoes, Boston Rules},
+        		pdfauthor={Phillip Anderson}, pdfsubject={polish horseshoes},
+		        pdfkeywords={beer, frisbee, polish, horseshoes, boston}}
+\hypersetup{urlcolor=CadetBlue, linkcolor=CadetBlue}
+\pdfstringdefDisableCommands{\def\proposed{\textsc{(Proposed)}}}
+
+\setcounter{secnumdepth}{2}
+\setcounter{tocdepth}{2}
+\setlist[enumerate, 1]{label=\thesection.\arabic*, parsep=0pt}
+\setlist[enumerate, 2]{leftmargin=1.4em}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\pretitle{\vspace{-85pt} \begin{flushleft} \HorRule \fontsize{50}{50}  \color{CadetBlue} \selectfont} % Horizontal rule before the title
+
+\title{\textsf{Polish Horseshoes}} % Your article title
+
+\posttitle{\par\end{flushleft}\vskip .0em} % Whitespace under the title
+
+\preauthor{\color{CadetBlue} \huge\hspace{2pt}\textsf{Boston League Rules}} %
+
+\author{}
+
+\postauthor{\footnotesize \color{Black}
+  \hfill \color{Black}\large \rev: \today
+
+  \HorRule\vspace{-50pt}
+}
+
+\setlength{\columnsep}{4ex}
+\date{}
+
+\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\maketitle
+
+\thispagestyle{headings}
+
+\section{Series and tournament play}
+\begin{enumerate}[label=\thesection.\arabic*]
+	\item In regular season and tournament play, the winner of a \emph{match} must win the majority of sets in a best-of-M format (M typically 1). Sets are won by winning the majority of games in a best-of-N format (N typically 3).
+	\item Player sides and first throw alternate every game of the match after the first.
+	Rule~\ref{enu:fair_toss} is applied to initiate the match.
+	
+	\item Each team must use the same bottle for the duration of a match.
+
+	\begin{enumerate}
+		\item A broken bottle is replaced for the next game. 
+		Replacements must be used for the rest of the match or until they break.
+	\end{enumerate}
+	\item \proposed Each player may be alloted a fixed number of bottles for the season
+	\item \proposed Handicap system for series play.
+
+\end{enumerate}
+
+% \newpage
+% \part*{Clarifications}
+% Section stub to describe and clarify specific scenarios that may be confusing.
+
+\include{addendum}
+\end{document}
